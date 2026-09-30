@@ -1,0 +1,144 @@
+func reverseString(str []int) []int{
+    left := 0
+    right := len(str) -1
+
+    for left < right{
+        str[left],str[right] = str[right],str[left]
+        left++
+        right--
+    }
+    return str
+
+}
+
+
+func multiplyOneDigit(num1 string, digit int, x int) []int {
+    var carry int = 0
+    var result []int
+    //var tempResult []int
+    
+
+    for i:= range num1{
+        number:= num1[len(num1)-(i+1)] - '0'
+        temp:= int(number) * int(digit) + carry
+        carry = temp/10
+        temp  = temp%10
+        result = append(result, temp)
+        fmt.Println("print XX:",result)
+    }
+   
+    //tempResult = reverseString(result)
+    var finalResult []int 
+   //fmt.Println("print tempresult is:",tempResult)
+    finalResult = result
+    for x>0 {
+        //finalResult = append(finalResult, 0)
+         finalResult = append([]int{0}, finalResult...)
+        x--; 
+    }
+
+    //finalResult = reverseString(finalResult)
+     fmt.Println("print finalresult is:",finalResult)
+
+    return finalResult
+   
+}
+
+func sumResults(temp [][]int, length int) {
+    var result []int
+    var sum int = 0
+    var carry int = 0
+    
+        
+     for j := 0; j < length; j++ {
+        for i := 0; i < len(temp); i++ {
+            sum = sum + temp[i][j]
+        }
+        sum = sum + carry
+        carry = sum/10
+        sum = sum % 10
+        result = append(result,sum)
+        sum = 0
+
+     }
+
+    fmt.Println("finalAjayResult", result)
+}
+
+
+
+
+func multiply(num1 string, num2 string, ) string {
+
+    //arrsize := len(num1)+len(num2)
+
+    //temp:= make([]int, arrsize)
+
+    if(num1 == "0" || num2 == "0"){
+     return "0"
+    }
+
+    var temp [][]int
+
+    for i:= range num2{
+        digit := num2[len(num2)-(i+1)] - '0'
+        temp = append(temp, multiplyOneDigit(num1,int(digit), i))
+    }
+
+    //sumResults(temp)
+
+    //need to add zero to make matrix symmetrical
+
+    totalRows := len(temp)
+    fmt.Println("totalRows", totalRows)
+
+    //finalrowlength := len(temp[totalRows])-1
+
+    /*for k:=0 ; k < len(temp) ; k++ {
+        for l:= 0; l < finalrowlength - len(temp[k]); l++{
+            temp[k] = append(temp[k], 0)
+        }
+    }*/
+
+    var length int
+
+
+    for j:= range temp{
+        fmt.Println("temp", temp[j])
+        length = len(temp[j])
+        
+    }
+
+    for k:=0 ; k < len(temp) ; k++ {
+        rowlength:= len(temp[k])
+        for l:= 0; l < length - rowlength; l++{
+            temp[k] = append(temp[k], 0)
+        }
+    }
+
+     fmt.Println("big row", length)
+
+      for m:= range temp{
+        fmt.Println("temp", temp[m])
+
+        sumResults(temp, length)
+        
+        
+    }
+
+    return " "
+    
+}
+
+
+
+
+func main(){
+    var num1, num2
+    fmt.Sprintf("enter Str1: %d", num1)
+    fmt.Sprintf("enter Str1: %d", num2)
+
+    totalresult: = multiply(num1, num2)
+
+    fmt.Println("The resultis", totalresult)
+}
