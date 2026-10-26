@@ -32,7 +32,7 @@ for name, marks in students.items():
 
     if Avg > 80:
       title = "topper"
-    elif Avg > 60 and Avg < 70:
+    elif Avg > 60 and Avg < 80:
       title = "pass"
     else:
       title = "NeedsImprovement"
